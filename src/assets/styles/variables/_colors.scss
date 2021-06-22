@@ -1,0 +1,77 @@
+$shadow: 0 0 30px 0 rgba(82, 63, 105, 0.06);
+// $shadow: 0 0 30px 0 rgba(82, 63, 105, 0.06);
+$color-common: #283552;
+$color-common-contrast: white;
+
+$color-primary: #222222;
+$color-primary-contrast: #fff;
+
+$color-secondary: #ad0023;
+$color-secondary-contrast: #fff;
+
+$color-active: #2ec973;
+$color-active-contrast: white;
+
+$color-warning: #ffa300;
+$color-warning-contrast: white;
+
+$color-info: #1d9ac1;
+$color-info-contrast: white;
+
+$color-alert: #f95f62;
+$color-alert-contrast: white;
+
+$color-default: #e5e5e5;
+$color-default-contrast: #283552;
+
+$color-disabled: #e5e5e5;
+$color-disabled-contrast: white;
+
+$color-gray-1: #252525;
+$color-gray-2: #555;
+$color-gray-3: #767676;
+$color-gray-4: #b5b5b5;
+$color-gray-5: #e5e5e5;
+$color-gray-6: #f7f8fa;
+
+$colors: (
+  common: (
+    color: $color-common,
+    contrast: $color-common-contrast,
+    text-class: false,
+  ),
+  primary: (
+    color: $color-primary,
+    contrast: $color-primary-contrast,
+  ),
+  secondary: (
+    color: $color-secondary,
+    contrast: $color-secondary-contrast,
+  ),
+  active: (
+    color: $color-active,
+    contrast: $color-active-contrast,
+  ),
+  warning: (
+    color: $color-warning,
+    contrast: $color-warning-contrast,
+  ),
+  info: (
+    color: $color-info,
+    contrast: $color-info-contrast,
+  ),
+  alert: (
+    color: $color-alert,
+    contrast: $color-alert-contrast,
+  ),
+  default: (
+    color: $color-default,
+    contrast: $color-default-contrast,
+  ),
+  disabled: (
+    color: $color-disabled,
+    contrast: $color-disabled-contrast,
+    text-class: false,
+  ),
+  
+);

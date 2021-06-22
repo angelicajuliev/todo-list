@@ -1,5 +1,6 @@
 import React from 'react';
 import logo from './logo.svg';
+import Button from './components/atoms/button/Button'
 import './App.css';
 
 function App() {
@@ -18,6 +19,8 @@ function App() {
         >
           Learn React
         </a>
+
+        <Button variation="primary" text='My first component' /> 
       </header>
     </div>
   );

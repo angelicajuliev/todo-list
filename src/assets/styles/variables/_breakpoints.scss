@@ -1,0 +1,18 @@
+$breakpoints: (
+  mobile-s: 320px,
+  mobile-m: 375px,
+  mobile-l: 425px,
+  tablet: 768px,
+  laptop: 1024px,
+  laptop-m: 1173px,
+  laptop-l: 1440px,
+);
+
+@mixin mobile {
+  $type-of: type-of(mobile-l);
+  @if map-has-key($breakpoints, mobile-l) {
+    @media all and (max-width: #{map-get($breakpoints, mobile-l)}) {
+      @content;
+    }
+  }
+}

@@ -1,0 +1,23 @@
+$max-width: 1440px;
+
+$gutter-5: 0.3rem;
+$gutter-10: 0.5rem;
+$gutter-15: 1rem;
+$gutter-20: 1.25rem;
+$gutter-40: 2.5rem;
+$gutter-80: 5rem;
+
+$padding: 1rem;
+$margin: 1rem;
+$border-radius: 1.5625rem;
+$height-header: 3rem;
+$height-header-lite: 3rem;
+
+$z-index: (
+  backdrop: 6,
+  menu: 4,
+  product-tags: 2,
+  navbar-menu: 500,
+  modal: 1000,
+  notification: 2000,
+);

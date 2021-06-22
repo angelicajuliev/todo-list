@@ -1,0 +1,132 @@
+$max-width-screen: map-get(
+  $map: $breakpoints,
+  $key: laptop-l,
+);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root-app {
+  height: 100vh;
+  overflow: hidden auto;
+  font-size: 17px;
+}
+
+body {
+  color: $color-common;
+  font-family: $font-family-regular;
+  line-height: $line-height;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+  line-height: $line-height;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: $font-family-title;
+}
+
+h1 {
+  font-size: $h1-font-size;
+}
+
+h2 {
+  font-size: $h2-font-size;
+}
+
+h3 {
+  font-size: $h3-font-size;
+}
+
+h4 {
+  font-size: $h4-font-size;
+}
+
+h5 {
+  font-size: $h5-font-size;
+}
+
+h6,
+small {
+  font-size: $h6-font-size;
+}
+
+p,
+label {
+  font-size: $p-font-size;
+  line-height: $line-height;
+}
+
+span,
+a {
+  font-size: 1em;
+  line-height: $line-height;
+}
+
+p,
+a {
+  padding: $padding / 2 0 $padding;
+}
+
+b {
+  font-family: $font-family-bold;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+button {
+  background: $color-default;
+  color: $color-default-contrast;
+  border: 1px solid;
+  cursor: pointer;
+  font-family: $font-family-bold;
+  font-size: $button-font-size;
+  transition: all 0.3s ease;
+  outline: 0;
+
+  &:active {
+    transform: scale(0.96);
+  }
+}
+
+img {
+  max-width: 100%;
+  display: block;
+  object-fit: cover;
+}
+
+.backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: rgba($color: $color-gray-6, $alpha: 0.2);
+  height: 100vh;
+  width: 100vw;
+  z-index: map-get($map: $z-index, $key: backdrop);
+}
+
+.page-content {
+  // max-width: $max-width-screen;
+  // margin:  0 auto;
+}
