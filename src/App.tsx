@@ -1,25 +1,16 @@
-import Button from './components/atoms/button/Button'
 import './App.css';
+import { TodoList } from './components/todo-list/TodoList'
+import { Palette } from './components/palette/Palette'
+import { Button } from './components/button/Button';
+import { Input } from './components/input/Input';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-
-        <Button variation="primary" text='My first component' />
-      </header>
-    </div>
+    <Palette>
+      <TodoList />
+      <Button text="Add TODO item" />
+      <Input label="What you should do?" />
+    </Palette>
   );
 }
 

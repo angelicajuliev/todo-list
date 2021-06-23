@@ -1,4 +1,4 @@
-@import '../../../assets/styles/variables/';
+@import "../../../assets/styles/variables/";
 
 button:disabled {
   cursor: not-allowed;
@@ -12,23 +12,19 @@ button:disabled {
   border-radius: 0.8rem;
   box-shadow: 0 0 4px #999;
   cursor: pointer;
+
+  position: relative;
   display: flex;
   flex-direction: row;
-  font-weight: 100;
   font-size: $p-font-size;
-  font-family: $font-family-bold;
+  font-family: $font-family-medium;
   justify-content: center;
   letter-spacing: 0;
   max-height: 3.5rem;
   min-width: 10rem;
   padding: 0.6rem;
-  position: relative;
   outline: none;
-  overflow: hidden;
   text-align: center;
-  text-decoration: none;
-  touch-action: manipulation;
-  transition: background 500ms;
 
   &:hover {
     text-decoration: none;
