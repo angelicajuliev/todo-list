@@ -1,15 +1,10 @@
-import './App.css';
-import { TodoList } from './components/todo-list/TodoList'
-import { Palette } from './components/palette/Palette'
-import { Button } from './components/button/Button';
-import { Input } from './components/input/Input';
+import { Palette } from './components/atoms/palette/Palette'
+import { Home } from './components/templates/home/Home'
 
 function App() {
   return (
     <Palette>
-      <TodoList />
-      <Button text="Add TODO item" />
-      <Input label="What you should do?" />
+      <Home />
     </Palette>
   );
 }

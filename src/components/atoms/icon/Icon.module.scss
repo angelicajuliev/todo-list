@@ -1,0 +1,31 @@
+@import "../../../assets/styles/variables/";
+
+$size-spinner: 1.3rem;
+
+.loading {
+  position: relative;
+  padding-right: 2.5rem;
+  padding-left: 2.5rem;
+  transition: color 500ms ease-out;
+  color: transparent !important;
+  
+  &:before {
+    content: "";
+    box-sizing: border-box;
+    position: absolute;
+    top: calc(50% - #{$size-spinner / 2});
+    right: calc(50% - #{$size-spinner / 2});
+    border-radius: 50%;
+    border: 2px solid $color-primary;
+    border-right: 2px solid transparent;
+    width: $size-spinner;
+    height: $size-spinner;
+    animation: loading 0.5s linear infinite;
+  }
+}
+
+@keyframes loading {
+  to {
+    transform: rotate(360deg);
+  }
+}
