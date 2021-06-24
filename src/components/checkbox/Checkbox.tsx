@@ -5,7 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 export type ICheckboxProps = {
     isChecked: boolean;
     name?: string;
-    label: string;
+    label?: string;
     onChange(value: boolean): void;
 }
 
