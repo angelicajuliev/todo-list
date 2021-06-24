@@ -1,6 +1,6 @@
 import './App.css';
-import { Palette } from './components/palette/Palette'
-import { Home } from './components/home/Home'
+import { Palette } from './components/atoms/palette/Palette'
+import { Home } from './components/templates/home/Home'
 
 function App() {
   return (

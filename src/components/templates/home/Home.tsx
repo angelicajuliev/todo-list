@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 
-import { TodoList } from '../todo-list/TodoList'
-import { Button } from '../button/Button';
-import { Input } from '../input/Input';
-import { ToDo } from '../../models/Todo';
-import { Select } from '../select/Select';
-import { FormTodo } from '../form-todo/FormTodo';
+import { TodoList } from '../../organisms/todo-list/TodoList'
+import { Button } from '../../atoms/button/Button';
+import { Input } from '../../atoms/input/Input';
+import { ToDo } from '../../../models/Todo';
+import { Select } from '../../atoms/select/Select';
+import { FormTodo } from '../../molecules/form-todo/FormTodo';
 
 import styles from './Home.module.scss'
 
-export type IHomeProps = {
-
-}
+export type IHomeProps = {}
 
 const Home: React.FC<IHomeProps> = ({ }) => {
     const [todos, setTodos] = useState<ToDo[]>([]);
@@ -23,8 +21,12 @@ const Home: React.FC<IHomeProps> = ({ }) => {
 
     const handleAddToDo = (todo: ToDo) => { setTodos([...todos, todo]) }
 
-    const handleFilterToDos = (value: string) => console.log(value);
+    const handleDeleteToDo = (todo: ToDo) => {
+        const todosUpdated = todos.filter((t) => t.id !== todo.id)
+        setTodos(todosUpdated)
+    }
 
+    const handleFilterToDos = (value: string) => console.log(value);
 
     return (
         <section className={styles.container}>

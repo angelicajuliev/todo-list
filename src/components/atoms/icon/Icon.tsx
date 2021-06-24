@@ -1,6 +1,7 @@
 import React from 'react';
 
 import IconButton from '@material-ui/core/IconButton';
+import AddIcon from '@material-ui/icons/Add';
 import EditIcon from '@material-ui/icons/Edit';
 import DeleteIcon from '@material-ui/icons/Delete';
 import DragIndicatorIcon from '@material-ui/icons/DragIndicator';
@@ -10,6 +11,7 @@ import styles from './Icon.module.scss'
 
 export enum ACTIONS {
     SAVE = 'save',
+    ADD = 'add',
     DELETE = 'delete',
     EDIT = 'edit',
     DRAG_DROP = 'drag_drop',
@@ -34,6 +36,7 @@ const Icon: React.FC<IIconProps> = (props) => {
         [ACTIONS.DELETE]: <DeleteIcon />,
         [ACTIONS.EDIT]: <EditIcon />,
         [ACTIONS.DRAG_DROP]: <DragIndicatorIcon />,
+        [ACTIONS.ADD]: <AddIcon />,
     }
 
     return (

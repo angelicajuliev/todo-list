@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
-import { ToDo } from '../../models/Todo';
-import { Button } from '../button/Button';
-import { Input } from '../input/Input';
-import { ACTIONS, Icon } from '../icon/Icon';
+import { ToDo } from '../../../models/Todo';
+import { Button } from '../../atoms/button/Button';
+import { Input, INPUT_VARIATIONS } from '../../atoms/input/Input';
+import { ACTIONS, Icon } from '../../atoms/icon/Icon';
 
 import styles from './FormTodo.module.scss'
 
@@ -33,12 +33,25 @@ const FormTodo: React.FC<IFormTodoProps> = ({ isLoading, isSuccess, error: error
 
     const handleParentError = () => setError(errorParent ?? '')
 
+    const handleSuccess = () => {
+        setError('');
+        setText('')
+    }
+
+
     useEffect(handleParentError, [errorParent]);
+    useEffect(handleSuccess, [isSuccess]);
 
     return (
         <section className={styles.container}>
-            <Input placeholder="Escribe algo que tengas por hacer" onChange={handleChangeText} error={error} onEnter={handleNewToDo} />
-            <Icon action={ACTIONS.SAVE} onClick={handleNewToDo} isLoading={isLoading} />
+            <Icon action={ACTIONS.ADD} onClick={handleNewToDo} isLoading={isLoading} />
+            <Input
+                variation={INPUT_VARIATIONS.NAKED}
+                placeholder="Agregar tarea para hacer"
+                onChange={handleChangeText}
+                onEnter={handleNewToDo}
+                error={error}
+            />
         </section>
     );
 }

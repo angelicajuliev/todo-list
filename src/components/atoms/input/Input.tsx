@@ -31,30 +31,41 @@ const Input: React.FC<IInputProps> = (props) => {
     } = props;
     const [value, setValue] = useState('');
 
-    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => onChange && onChange(event.target.value)
+    const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const value = event.target.value;
+        setValue(value)
+        onChange && onChange(value)
+    }
 
     const handleKeyUp = (e: any) => {
         const ENTER_KEY = 13;
         if (e.keyCode === ENTER_KEY) onEnter()
     };
 
-    useEffect(() => { setValue(valueParent ?? '') }, [valueParent]);
+    const handleChangeValueParent = () => setValue(valueParent ?? '');
+
+    useEffect(handleChangeValueParent, [valueParent]);
 
     const inputVariation = {
         [INPUT_VARIATIONS.OUTLINE]: (
             <TextField
-                onKeyUp={handleKeyUp}
                 error={!!error}
-                defaultValue={value}
+                value={value}
                 label={label}
                 variant="outlined"
                 placeholder={placeholder}
+                onKeyUp={handleKeyUp}
                 onChange={handleChange}
                 helperText={error}
             />
         ),
         [INPUT_VARIATIONS.NAKED]: (
-            <InputBase defaultValue={value} onChange={handleChange} />
+            <InputBase
+                value={value}
+                placeholder={placeholder}
+                onChange={handleChange}
+                onKeyUp={handleKeyUp}
+            />
         )
     }
     return inputVariation[variation];

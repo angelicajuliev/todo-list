@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ToDo } from '../../models/Todo';
-import { Todo } from '../todo/Todo';
+import { ToDo } from '../../../models/Todo';
+import { Todo } from '../../molecules/todo/Todo';
 
 export type ITodoListProps = {
     todos: ToDo[]

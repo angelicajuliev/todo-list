@@ -1,9 +1,9 @@
 import React, { FC, useState } from 'react'
 import { useEffect } from 'react';
 
-import { Checkbox } from '../checkbox/Checkbox'
-import { ACTIONS, Icon } from "../icon/Icon";
-import { Input, INPUT_VARIATIONS } from '../input/Input';
+import { Checkbox } from '../../atoms/checkbox/Checkbox'
+import { ACTIONS, Icon } from "../../atoms/icon/Icon";
+import { Input, INPUT_VARIATIONS } from '../../atoms/input/Input';
 
 import styles from './Todo.module.scss'
 
