@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from 'react';
 
 import { ToDo } from '../../../models/Todo';
-import { Button } from '../../atoms/button/Button';
 import { Input, INPUT_VARIATIONS } from '../../atoms/input/Input';
 import { ACTIONS, Icon } from '../../atoms/icon/Icon';
 
 import styles from './FormTodo.module.scss'
+import { RequestState, REQUEST_STATES } from '../../../models/App';
 
 export type IFormTodoProps = {
-    isLoading: boolean;
-    isSuccess: boolean;
+    state?: RequestState;
     error?: string;
     onSubmit(todo: ToDo): void;
 }
 
-const FormTodo: React.FC<IFormTodoProps> = ({ isLoading, isSuccess, error: errorParent, onSubmit }) => {
+const FormTodo: React.FC<IFormTodoProps> = ({ state, error: errorParent, onSubmit }) => {
     const [text, setText] = useState<string>();
     const [error, setError] = useState('');
 
@@ -34,18 +33,21 @@ const FormTodo: React.FC<IFormTodoProps> = ({ isLoading, isSuccess, error: error
     const handleParentError = () => setError(errorParent ?? '')
 
     const handleSuccess = () => {
-        setError('');
-        setText('')
+        if (state === REQUEST_STATES.SUCCESS) {
+            setError('');
+            setText('')
+        }
     }
 
 
     useEffect(handleParentError, [errorParent]);
-    useEffect(handleSuccess, [isSuccess]);
+    useEffect(handleSuccess, [state]);
 
     return (
         <section className={styles.container}>
-            <Icon action={ACTIONS.ADD} onClick={handleNewToDo} isLoading={isLoading} />
+            <Icon action={ACTIONS.ADD} onClick={handleNewToDo} isLoading={state === REQUEST_STATES.PENDING} />
             <Input
+                value={text}
                 variation={INPUT_VARIATIONS.NAKED}
                 placeholder="Agregar tarea para hacer"
                 onChange={handleChangeText}

@@ -1,4 +1,4 @@
-import React, { FC, useState } from 'react'
+import React, { useState } from 'react'
 import { useEffect } from 'react';
 
 import { Checkbox } from '../../atoms/checkbox/Checkbox'

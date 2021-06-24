@@ -42,7 +42,9 @@ const Input: React.FC<IInputProps> = (props) => {
         if (e.keyCode === ENTER_KEY) onEnter()
     };
 
-    const handleChangeValueParent = () => setValue(valueParent ?? '');
+    const handleChangeValueParent = () => {
+        setValue(valueParent ?? '')
+    };
 
     useEffect(handleChangeValueParent, [valueParent]);
 

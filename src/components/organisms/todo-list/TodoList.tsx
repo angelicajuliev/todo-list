@@ -8,7 +8,10 @@ export type ITodoListProps = {
 }
 
 const TodoList: React.FC<ITodoListProps> = ({ todos }) => {
-    return <> {todos.map((todo) => <Todo key={todo.id} {...todo} />)}</>;
+    const emptyState = <h5>No tienes tareas pendientes por hacer</h5>
+    const todosEl = <> {todos.map((todo) => <Todo key={todo.id} {...todo} />)}</>;
+
+    return todos.length > 0 ? todosEl : emptyState;
 }
 
 export { TodoList };
