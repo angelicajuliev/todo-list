@@ -1,7 +1,7 @@
 import { Palette } from "./components/atoms/palette/Palette";
-import { Home } from "./components/templates/home/Home";
 import { ToDoContext, ToDoReducer } from "./context/TodoContext";
 import { TodoProvider } from "./context/TodoProvider";
+import { Home } from "./pages/Home";
 
 function App() {
   return (

@@ -11,12 +11,17 @@ import { FormTodo } from "../../molecules/form-todo/FormTodo";
 
 import styles from "./Home.module.scss";
 
-export type IHomeProps = {};
+export type IHomeProps = {
+  todos: ToDo[];
+  formState?: RequestState;
+  onAdd(todo: ToDo): void;
+  onUpdate(todo: ToDo): void;
+  onDelete(todo: ToDo): void;
+};
 
-const Home: React.FC<IHomeProps> = ({}) => {
-  const [todos, setTodos] = useState<ToDo[]>([]);
+const Home: React.FC<IHomeProps> = (props) => {
+  const { todos, formState, onAdd, onUpdate, onDelete } = props;
   const [shownToDos, setFilteredToDos] = useState<ToDo[]>([]);
-  const [newToDoState, setNewToDoState] = useState<RequestState>();
   const [isFilteredCompleted, setFilterCompleted] = useState<boolean>();
 
   const _filterToDos = () => {
@@ -36,25 +41,10 @@ const Home: React.FC<IHomeProps> = ({}) => {
   };
 
   const handleAddToDo = (todo: ToDo) => {
-    setNewToDoState(REQUEST_STATES.PENDING);
-    const todoUpdated = { ...todo, order: todos.length, id: getRandomNumber() };
-    setTodos([...todos, todoUpdated]);
-
-    setTimeout(() => {
-      setNewToDoState(REQUEST_STATES.SUCCESS);
-    }, 150);
+    onAdd(todo)
   };
-
-  const handleDeleteToDo = (todo: ToDo) => {
-    const todosUpdated = todos.filter((t) => t.id !== todo.id);
-    setTodos(todosUpdated);
-  };
-
-  const handleUpdateToDo = (todo: ToDo) => {
-    const todosUpdated = todos.map((t) => (t.id === todo.id ? todo : t));
-    setTodos(todosUpdated);
-  };
-
+  const handleDeleteToDo = (todo: ToDo) => onDelete(todo);
+  const handleUpdateToDo = (todo: ToDo) => onUpdate(todo);
   const handleFilterToDos = (value?: boolean) => setFilterCompleted(value);
 
   const handleUpdateToDos = () => {
@@ -86,7 +76,7 @@ const Home: React.FC<IHomeProps> = ({}) => {
       <main className={styles.container}>
         <SelectStates className={styles.filter} onChange={handleFilterToDos} />
         {shownToDos.length === 0 ? emptyEl : listEl}
-        <FormTodo state={newToDoState} onSubmit={handleAddToDo} />
+        <FormTodo state={formState} onSubmit={handleAddToDo} />
       </main>
     </section>
   );

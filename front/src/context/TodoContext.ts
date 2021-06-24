@@ -1,13 +1,12 @@
 import React, { createContext, FC, useContext, useReducer } from "react";
 import { ToDo } from "../models/Todo";
 import api from "../api/todo.api";
+import { RequestState } from "../models/App";
 
 export type TodoState = {
   todos: ToDo[];
+  formState?: RequestState;
 
-  // addTodo?: (dispatch: React.Dispatch<Action>) => (todo: ToDo) => any;
-  // updateTodo?: (dispatch: React.Dispatch<Action>) => (todo: ToDo) => any;
-  // deleteTodo?: (dispatch: React.Dispatch<Action>) => (todo: ToDo) => any;
   addTodo?(todo: ToDo): void;
   updateTodo?(todo: ToDo): void;
   deleteTodo?(todo: ToDo): void;
@@ -46,7 +45,7 @@ export const ToDoReducer = (state: TodoState, action: Action): TodoState => {
 export const ToDoActions: any = {
   addTodo: (dispatch: React.Dispatch<Action>) => {
     return async (todo: ToDo) => {
-      const result = await api.get<ToDo>("/blogpost");
+      const result = await api.get<ToDo>("/todo");
       dispatch({ type: TODO_ACTIONS.ADD_TODO, payload: result.data });
     };
   },
@@ -55,21 +54,5 @@ export const ToDoActions: any = {
 };
 
 export const ToDoInitialValues = { todos: [] };
-
 export const ToDoContext = createContext<TodoState>(ToDoInitialValues);
-
-export const ToDoProvider: FC<any> = ({ children }) => {
-  const [state, dispatch] = useReducer(ToDoReducer, ToDoInitialValues);
-  const actions = {
-    addTodo: (dispatch: React.Dispatch<Action>) => {
-      return async (todo: ToDo) => {
-        const result = await api.get<ToDo>("/blogpost");
-        dispatch({ type: TODO_ACTIONS.ADD_TODO, payload: result.data });
-      };
-    },
-  };
-
-  return children;
-};
-
 export const useTodoContext = () => useContext(ToDoContext);
