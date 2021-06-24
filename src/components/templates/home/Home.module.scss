@@ -1,5 +1,22 @@
+@import "../../../assets/styles/variables/";
+
 .container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: $gutter-15;
+  max-width: #{map-get($breakpoints, laptop)};
+  margin: $gutter-40 auto $gutter-15;
+  padding: $gutter-10;
+
+  .filter {
+    align-self: flex-end;
+    min-width: 15rem;
+  }
+  @include mobile {
+    margin: $gutter-15 auto $gutter-15;
+
+    .filter {
+      align-self: auto;
+    }
+  }
 }
