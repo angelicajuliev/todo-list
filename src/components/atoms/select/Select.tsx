@@ -14,20 +14,25 @@ export type ISelectProps = {
     label?: string;
     onChange(value: string): void;
     options: Option[];
+    className?: string;
 }
 
 const Select: React.FC<ISelectProps> = (props) => {
-    const { id = 'cmb', label, onChange, options } = props;
-    const [value, setValue] = useState<string>();
+    const { id = 'cmb', label, onChange, options, className } = props;
+    const [value, setValue] = useState<string>('');
 
-    const handleChange = (_: any, value: any) => setValue(value)
+    const handleChange = (event: any) => {
+        const value = event.target.value as string;
+        setValue(value)
+        onChange(value)
+    }
 
-    const optionsItems = options.map(({ value, text }) => (
+    const optionsEl = options.map(({ value, text }) => (
         <MenuItem key={value} value={value}> {text ?? value} </MenuItem>)
     )
 
     return (
-        <FormControl>
+        <FormControl className={className}>
             <InputLabel id={`${id}-label`}>{label}</InputLabel>
             <SelectMaterial
                 labelId={`${id}-label`}
@@ -35,7 +40,7 @@ const Select: React.FC<ISelectProps> = (props) => {
                 value={value}
                 onChange={handleChange}
             >
-                {optionsItems}
+                {optionsEl}
             </SelectMaterial>
         </FormControl>
     );

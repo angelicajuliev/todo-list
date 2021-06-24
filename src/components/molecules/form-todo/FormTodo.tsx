@@ -49,7 +49,7 @@ const FormTodo: React.FC<IFormTodoProps> = ({ state, error: errorParent, onSubmi
             <Input
                 value={text}
                 variation={INPUT_VARIATIONS.NAKED}
-                placeholder="Agregar tarea para hacer"
+                placeholder="¿Qué hay pa' hacer?"
                 onChange={handleChangeText}
                 onEnter={handleNewToDo}
                 error={error}
