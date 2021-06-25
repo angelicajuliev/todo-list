@@ -57,7 +57,7 @@ const Todo: React.FC<ITodoProps> = (props) => {
         onClick={handleDrag}
         className={styles.dragDropIcon}
       />
-      <Checkbox isChecked={isCompleted} onChange={handleComplete} />
+      <Checkbox isChecked={isCompleted} onChange={handleComplete} name={text} />
       {todoText}
       <Icon action={ACTIONS.DELETE} onClick={handleDeleteItem} />
     </article>

@@ -20,7 +20,7 @@ const SelectStates: React.FC<ISelectStatesProps> = ({ className, onChange }) => 
     ]
 
     const handleFilterToDos = (value: string) => {
-        const isCompleted = value == FILTER_STATES.COMPLETED;
+        const isCompleted = value === FILTER_STATES.COMPLETED;
         const isWithoutFilter = value === FILTER_STATES.WITHOUT_FILTER
         onChange && onChange(isWithoutFilter ? undefined : isCompleted)
     }

@@ -11,9 +11,10 @@ export type IFormTodoProps = {
     state?: RequestState;
     error?: string;
     onSubmit(todo: ToDo): void;
+    className?: string;
 }
 
-const FormTodo: React.FC<IFormTodoProps> = ({ state, error: errorParent, onSubmit }) => {
+const FormTodo: React.FC<IFormTodoProps> = ({ state, error: errorParent, onSubmit, className }) => {
     const [text, setText] = useState<string>();
     const [error, setError] = useState('');
 
@@ -44,7 +45,7 @@ const FormTodo: React.FC<IFormTodoProps> = ({ state, error: errorParent, onSubmi
     useEffect(handleSuccess, [state]);
 
     return (
-        <section className={styles.container}>
+        <section className={`${styles.container} ${className}`}>
             <Icon action={ACTIONS.ADD} onClick={handleNewToDo} isLoading={state === REQUEST_STATES.PENDING} />
             <Input
                 value={text}

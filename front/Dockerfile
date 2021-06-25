@@ -6,7 +6,7 @@ COPY package.json .
 RUN yarn
 ENV PATH="/code/node_modules/.bin:$PATH"
 
-RUN apk update && apk add --update --no-cache git zsh curl openssh
+RUN apk update && apk add --update --no-cache git zsh curl
 RUN sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 COPY . .
 

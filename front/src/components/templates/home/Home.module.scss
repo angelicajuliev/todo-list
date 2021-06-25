@@ -1,17 +1,36 @@
 @import "../../../assets/styles/variables/";
 
 .container {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid:
+    ". filter" 3rem
+    "content content" 1fr
+    "form form" 3rem / 1fr 15rem;
   gap: $gutter-15;
   max-width: #{map-get($breakpoints, laptop)};
-  margin: $gutter-40 auto $gutter-15;
+  max-height: calc(100vh - 5rem);
+  margin: $gutter-20 auto $gutter-15;
   padding: $gutter-10;
+  overflow: hidden;
 
   .filter {
     align-self: flex-end;
     min-width: 15rem;
+    grid-area: filter;
   }
+
+  .content {
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: $gutter-10;
+    grid-area: content;
+  }
+
+  .form {
+    grid-area: form;
+  }
+
   @include mobile {
     margin: $gutter-15 auto $gutter-15;
 

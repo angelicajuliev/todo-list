@@ -5,13 +5,13 @@ services:
         build:
             context: ./front
             dockerfile: Dockerfile
-        # restart: always
+        restart: always
         volumes:
             - ./front:/code
             - /code/node_modules
-            - ${HOME}/.ssh:/root/.ssh:ro
         environment:
             - CHOKIDAR_USEPOLLING=true
+            - REACT_APP_API_URL=http://localhost:9000
         ports:
             - 3000:3000
         links:
@@ -29,10 +29,30 @@ services:
             - ./api:/api
             - ./api/nodemon.json:/api/nodemon.json
             - /api/node_modules
-            - ${HOME}/.ssh:/root/.ssh:ro
+        environment:
+            - CHOKIDAR_USEPOLLING=true
+            - CONNECTION_STRING=mongodb://db:27017/todo
+        depends_on:
+            - db
         networks:
             - todoappnetwork
+
+    db:
+        image: mongo:4.2
+        restart: unless-stopped
+        container_name: db
+        volumes:
+            - mongodata:/data/db
+        ports:
+            - 27017:27017
+        networks:
+            - todoappnetwork
+        logging:
+            driver: none
 
 networks:
     todoappnetwork:
         driver: bridge
+
+volumes:
+    mongodata:
