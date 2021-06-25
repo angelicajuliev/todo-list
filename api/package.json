@@ -5,7 +5,8 @@
     "main": "dist/app.js",
     "engines": {
         "node": "16.2.0",
-        "npm": "7.13.0"
+        "npm": "7.13.0",
+        "yarn": "1.22.5"
     },
     "scripts": {
         "build": "tsc -p ./",
