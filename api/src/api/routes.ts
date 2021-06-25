@@ -26,7 +26,6 @@ router.put("/todo/:id", async (request, response) => {
       text: toDo.text,
       isCompleted: toDo.isCompleted
     }
-
     const updated = await ToDo.findByIdAndUpdate(id, toDoUpdated, {new: true});
     response.json(updated).end()
   } catch (error) {}

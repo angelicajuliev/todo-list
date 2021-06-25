@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react";
+import useDebounce from "../../../hooks/useDebounce";
 
 import { Checkbox } from "../../atoms/checkbox/Checkbox";
 import { ACTIONS, Icon } from "../../atoms/icon/Icon";
@@ -24,23 +25,30 @@ const Todo: React.FC<ITodoProps> = (props) => {
     onChange,
   } = props;
   const [isCompleted, setIsCompleted] = useState<boolean>(isCompletedParent);
+  const [textUpdate, setTextUpdate] = useState(text);
+  const debouncedText = useDebounce(textUpdate, 500);
 
   const handleComplete = (isComplete: boolean) => {
     setIsCompleted(isComplete);
     onComplete(isComplete);
   };
 
+  const handleDebounce = () => {
+    if (debouncedText) {
+      onChange(textUpdate);
+    }
+  };
+
   const handleDrag = () => console.log("Drag and drop");
-
-  const handleEdit = () =>  onChange(text);
-
-  const handleChange = (value: string) =>  onChange(value);
-
+  const handleEdit = () => onChange(textUpdate);
+  const handleChange = (value: string) => setTextUpdate(value);
   const handleDeleteItem = () => onDelete();
-
   const handleCompletedParent = () => setIsCompleted(isCompletedParent);
+  const handleChangeText = () => setTextUpdate(text);
 
   useEffect(handleCompletedParent, [isCompletedParent]);
+  useEffect(handleChangeText, [text]);
+  useEffect(handleDebounce, [debouncedText]);
 
   const todoText = isCompleted ? (
     <p className={styles.todoCompleted}>{text}</p>
