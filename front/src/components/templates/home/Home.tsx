@@ -41,7 +41,7 @@ const Home: React.FC<IHomeProps> = (props) => {
   };
 
   const handleAddToDo = (todo: ToDo) => {
-    onAdd(todo)
+    onAdd(todo);
   };
   const handleDeleteToDo = (todo: ToDo) => onDelete(todo);
   const handleUpdateToDo = (todo: ToDo) => onUpdate(todo);
@@ -75,8 +75,8 @@ const Home: React.FC<IHomeProps> = (props) => {
       <Header />
       <main className={styles.container}>
         <SelectStates className={styles.filter} onChange={handleFilterToDos} />
-        {shownToDos.length === 0 ? emptyEl : listEl}
-        <FormTodo state={formState} onSubmit={handleAddToDo} />
+        <article className={styles.content}>{shownToDos.length === 0 ? emptyEl : listEl}</article>
+        <FormTodo className={styles.form} state={formState} onSubmit={handleAddToDo} />
       </main>
     </section>
   );
