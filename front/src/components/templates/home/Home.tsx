@@ -53,7 +53,7 @@ const Home: React.FC<IHomeProps> = (props) => {
   const emptyEl = (
     <h6>
       {isFilteredCompleted
-        ? "No has completado tareas"
+        ? "No tienes tareas completadas"
         : isFilteredCompleted === undefined
         ? "No has agregado tareas para hacer"
         : "No tienes tareas por hacer"}{" "}
