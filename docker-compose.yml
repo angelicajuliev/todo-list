@@ -1,7 +1,7 @@
 version: "3.9"
 
 services:
-    frontend:
+    web:
         build:
             context: ./front
             dockerfile: Dockerfile
@@ -31,8 +31,8 @@ services:
             - /api/node_modules
         environment:
             - CHOKIDAR_USEPOLLING=true
-            - NODE_ENV=production
             - CONNECTION_STRING=mongodb://db:27017/todo
+            - PORT=9000
         depends_on:
             - db
         networks:

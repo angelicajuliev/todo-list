@@ -75,7 +75,7 @@ export const ToDoActions: any = {
   updateTodo: (dispatch: React.Dispatch<Action>) => {
     return async (toDo: ToDo) => {
       const result = await api.put<ToDo>(`/todo/${toDo.id}`, toDo);
-      dispatch({ type: TODO_ACTIONS.UPDATE_TODO, payload: result });
+      dispatch({ type: TODO_ACTIONS.UPDATE_TODO, payload: result.data });
     };
   },
 };

@@ -32,7 +32,9 @@ const Todo: React.FC<ITodoProps> = (props) => {
 
   const handleDrag = () => console.log("Drag and drop");
 
-  const handleEdit = () => onChange(text);
+  const handleEdit = () =>  onChange(text);
+
+  const handleChange = (value: string) =>  onChange(value);
 
   const handleDeleteItem = () => onDelete();
 
@@ -46,6 +48,7 @@ const Todo: React.FC<ITodoProps> = (props) => {
     <Input
       variation={INPUT_VARIATIONS.NAKED}
       onEnter={handleEdit}
+      onChange={handleChange}
       value={text}
     />
   );
