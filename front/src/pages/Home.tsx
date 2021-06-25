@@ -5,7 +5,7 @@ import { ToDo } from "../models/Todo";
 
 export type IHomeProps = {};
 
-const Home: React.FC<IHomeProps> = ({}) => {
+const Home: React.FC<IHomeProps> = () => {
   const { todos, formState, initialize, addTodo, updateTodo, deleteTodo } = useTodoContext();
   const handleAdd = useCallback((todo: ToDo) => addTodo && addTodo(todo), []);
   const handleUpdate = useCallback((todo: ToDo) => updateTodo && updateTodo(todo), []);

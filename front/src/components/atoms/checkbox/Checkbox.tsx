@@ -24,6 +24,7 @@ const Checkbox: React.FC<ICheckboxProps> = ({
 
   const handleChangeFromParent = () => setValue(isChecked);
 
+  // eslint-disable-next-line
   useEffect(() => handleChangeFromParent(), [isChecked]);
 
   return (

@@ -1,7 +1,7 @@
-import React, { createContext, FC, useContext, useReducer } from "react";
+import React, { createContext, useContext, } from "react";
 import { ToDo } from "../models/Todo";
-import api from "../api/todo.api";
 import { RequestState, REQUEST_STATES } from "../models/App";
+import api from "../api/todo.api";
 
 export type TodoState = {
   todos: ToDo[];

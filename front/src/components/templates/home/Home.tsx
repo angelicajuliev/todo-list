@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
 
-import { getRandomNumber } from "../../../util";
 import { ToDo } from "../../../models/Todo";
-import { RequestState, REQUEST_STATES } from "../../../models/App";
+import { RequestState  } from "../../../models/App";
 import { TodoList } from "../../organisms/todo-list/TodoList";
 
 import { Header } from "../../atoms/header/Header";
@@ -25,7 +24,7 @@ const Home: React.FC<IHomeProps> = (props) => {
   const [isFilteredCompleted, setFilterCompleted] = useState<boolean>();
 
   const _filterToDos = () => {
-    if (isFilteredCompleted == undefined) {
+    if (isFilteredCompleted === undefined) {
       setFilteredToDos(todos);
       return;
     }
@@ -47,9 +46,7 @@ const Home: React.FC<IHomeProps> = (props) => {
   const handleUpdateToDo = (todo: ToDo) => onUpdate(todo);
   const handleFilterToDos = (value?: boolean) => setFilterCompleted(value);
 
-  const handleUpdateToDos = () => {
-    _filterToDos();
-  };
+  const handleUpdateToDos = () =>  _filterToDos();
 
   useEffect(handleUpdateToDos, [todos, isFilteredCompleted]);
 

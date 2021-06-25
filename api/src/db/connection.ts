@@ -1,7 +1,9 @@
 import { connect} from "mongoose";
 async function connection(): Promise<void> {
-  // 4. Connect to MongoDB
-  await connect("mongodb://db:27017/todo", {
+  // Connect to MongoDB
+  console.log(process.env.CONNECTION_STRING);
+  
+  await connect(process.env.CONNECTION_STRING, {
     useCreateIndex: true
   });
 }

@@ -11,14 +11,13 @@ services:
             - /code/node_modules
         environment:
             - CHOKIDAR_USEPOLLING=true
+            - REACT_APP_API_URL=http://localhost:9000
         ports:
             - 3000:3000
         links:
             - api
         networks:
             - todoappnetwork
-        logging:
-            driver: none
     api:
         build:
             context: ./api
@@ -32,6 +31,7 @@ services:
             - /api/node_modules
         environment:
             - CHOKIDAR_USEPOLLING=true
+            - CONNECTION_STRING=mongodb://db:27017/todo
         depends_on:
             - db
         networks:
