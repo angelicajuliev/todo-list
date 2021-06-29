@@ -16,13 +16,10 @@ services:
             - 3000:3000
         links:
             - api
-        networks:
-            - todoappnetwork
     api:
         build:
             context: ./api
             dockerfile: Dockerfile
-        # restart: always
         ports:
             - 9000:9000
         volumes:
@@ -35,8 +32,6 @@ services:
             - PORT=9000
         depends_on:
             - db
-        networks:
-            - todoappnetwork
 
     db:
         image: mongo:4.2
@@ -46,14 +41,8 @@ services:
             - mongodata:/data/db
         ports:
             - 27017:27017
-        networks:
-            - todoappnetwork
         logging:
             driver: none
-
-networks:
-    todoappnetwork:
-        driver: bridge
 
 volumes:
     mongodata:

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 
 import { ToDo } from "../../../models/Todo";
 import { RequestState  } from "../../../models/App";
@@ -39,9 +39,10 @@ const Home: React.FC<IHomeProps> = (props) => {
     setFilteredToDos(filtered);
   };
 
-  const handleAddToDo = (todo: ToDo) => {
+  const handleAddToDo = useCallback((todo: ToDo) => {
     onAdd(todo);
-  };
+  }, []);
+
   const handleDeleteToDo = (todo: ToDo) => onDelete(todo);
   const handleUpdateToDo = (todo: ToDo) => onUpdate(todo);
   const handleFilterToDos = (value?: boolean) => setFilterCompleted(value);

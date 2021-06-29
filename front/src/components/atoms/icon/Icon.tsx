@@ -21,26 +21,27 @@ export type typeActions = ACTIONS
 
 export type IIconProps = {
     className?: string;
+    type?: "button" | "submit" | "reset";
     isLoading?: boolean;
     action: typeActions;
-    onClick(): void;
+    onClick?(): void;
 }
 
 const Icon: React.FC<IIconProps> = (props) => {
-    const { action, onClick, isLoading, className } = props;
+    const { action, onClick, isLoading, className, type } = props;
 
-    const handleClick = () => onClick()
+    const handleClick = () => onClick && onClick()
 
     const icons = {
         [ACTIONS.SAVE]: <SaveIcon />,
         [ACTIONS.DELETE]: <DeleteIcon />,
         [ACTIONS.EDIT]: <EditIcon />,
         [ACTIONS.DRAG_DROP]: <DragIndicatorIcon />,
-        [ACTIONS.ADD]: <AddIcon />,
+        [ACTIONS.ADD]: <AddIcon aria-label="Agregar" />,
     }
 
     return (
-        <IconButton aria-label={action} color="primary" onClick={handleClick} className={`${className} ${isLoading && styles.loading}`}>
+        <IconButton aria-label={action} type={type} color="primary" onClick={handleClick} className={`${className} ${isLoading && styles.loading}`} disabled={isLoading}>
             {icons[action]}
         </IconButton>
     );

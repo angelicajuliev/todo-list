@@ -1,62 +1,81 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from "react";
 
-import { ToDo } from '../../../models/Todo';
-import { Input, INPUT_VARIATIONS } from '../../atoms/input/Input';
-import { ACTIONS, Icon } from '../../atoms/icon/Icon';
+import { ToDo } from "../../../models/Todo";
+import { Input, INPUT_VARIATIONS } from "../../atoms/input/Input";
+import { ACTIONS, Icon } from "../../atoms/icon/Icon";
 
-import styles from './FormTodo.module.scss'
-import { RequestState, REQUEST_STATES } from '../../../models/App';
+import styles from "./FormTodo.module.scss";
+import { RequestState, REQUEST_STATES } from "../../../models/App";
 
 export type IFormTodoProps = {
-    state?: RequestState;
-    error?: string;
-    onSubmit(todo: ToDo): void;
-    className?: string;
-}
+  state?: RequestState;
+  error?: string;
+  onSubmit(todo: ToDo): void;
+  className?: string;
+};
 
-const FormTodo: React.FC<IFormTodoProps> = ({ state, error: errorParent, onSubmit, className }) => {
-    const [text, setText] = useState<string>();
-    const [error, setError] = useState('');
+const FormTodo: React.FC<IFormTodoProps> = ({
+  state,
+  error: errorParent,
+  onSubmit,
+  className,
+}) => {
+  const [text, setText] = useState<string>("");
+  const [error, setError] = useState("");
+  const [isLoading, setLoading] = useState(false);
+  const inputRef = useRef<HTMLInputElement>();
 
-    const handleChangeText = (value: string) => setText(value)
+  const handleChangeText = (value: string) => {
+    setText(value);
+  };
 
-    const handleNewToDo = () => {
-        if (!text) {
-            setError('Escribe tu pendiente')
-            return;
-        }
+  const handleSubmitToDo = (e: any) => {
+    e.preventDefault();
 
-        const todo: ToDo = { id: '', text, isCompleted: false }
-        setError('')
-        onSubmit(todo);
+    if (isLoading) return;
+    if (!text) {
+      setError("Escribe tu pendiente");
+      inputRef?.current && inputRef.current.focus();
+      return;
     }
 
-    const handleParentError = () => setError(errorParent ?? '')
+    const todo: ToDo = { id: "", text, isCompleted: false };
+    setLoading(true);
+    setError("");
+    onSubmit(todo);
+  };
 
-    const handleSuccess = () => {
-        if (state === REQUEST_STATES.SUCCESS) {
-            setError('');
-            setText('')
-        }
+  const handleParentError = () => setError(errorParent ?? "");
+
+  const handleStateChange = () => {
+    setLoading(state === REQUEST_STATES.PENDING);
+    if (state === REQUEST_STATES.SUCCESS) {
+      setError("");
+      setText("");
     }
+  };
 
+  useEffect(handleParentError, [errorParent]);
+  useEffect(handleStateChange, [state]);
 
-    useEffect(handleParentError, [errorParent]);
-    useEffect(handleSuccess, [state]);
-
-    return (
-        <section className={`${styles.container} ${className}`}>
-            <Icon action={ACTIONS.ADD} onClick={handleNewToDo} isLoading={state === REQUEST_STATES.PENDING} />
-            <Input
-                value={text}
-                variation={INPUT_VARIATIONS.NAKED}
-                placeholder="Agregar una tarea"
-                onChange={handleChangeText}
-                onEnter={handleNewToDo}
-                error={error}
-            />
-        </section>
-    );
-}
+  return (
+    <form
+      className={`${styles.container} ${className}`}
+      onSubmit={handleSubmitToDo}
+    >
+      <Icon type="submit" action={ACTIONS.ADD} isLoading={isLoading} />
+      <Input
+        value={text}
+        label="Agregar una tarea"
+        variation={INPUT_VARIATIONS.NAKED}
+        placeholder="Agregar una tarea"
+        onChange={handleChangeText}
+        error={error}
+        ref={inputRef}
+        autoFocus={true}
+      />
+    </form>
+  );
+};
 
 export { FormTodo };

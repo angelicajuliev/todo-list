@@ -1,5 +1,21 @@
+@import "../../../assets/styles/variables/";
+
 .container {
   display: grid;
   grid: 1fr / 1.5rem 1fr;
   gap: 0.8rem;
+  align-items: flex-start;
+  padding-left: 1.3rem;
+
+  button {
+    padding-top: 0;
+  }
+
+  input {
+    font-size: $p-font-size;
+
+    &::-webkit-input-placeholder {
+      font-size: $h5-font-size;
+    }
+  }
 }

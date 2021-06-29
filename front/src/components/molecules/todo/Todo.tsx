@@ -58,6 +58,7 @@ const Todo: React.FC<ITodoProps> = (props) => {
       onEnter={handleEdit}
       onChange={handleChange}
       value={text}
+      label="tarea por hacer"
     />
   );
 
