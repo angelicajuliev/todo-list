@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import useDebounce from "../../../hooks/useDebounce";
 
 import { Checkbox } from "../../atoms/checkbox/Checkbox";
@@ -19,14 +18,16 @@ export type ITodoProps = {
 const Todo: React.FC<ITodoProps> = (props) => {
   const {
     isCompleted: isCompletedParent,
-    text,
+    text: todoText,
     onComplete,
     onDelete,
     onChange,
   } = props;
+  const SECONDS_TO_UPDATE = 1000 * 1;
   const [isCompleted, setIsCompleted] = useState<boolean>(isCompletedParent);
-  const [textUpdate, setTextUpdate] = useState(text);
-  const debouncedText = useDebounce(textUpdate, 500);
+  const [textUpdate, setTextUpdate] = useState(todoText);
+  const [isFirstTime, setFirstTime] = useState(true);
+  const debouncedText = useDebounce(textUpdate, SECONDS_TO_UPDATE);
 
   const handleComplete = (isComplete: boolean) => {
     setIsCompleted(isComplete);
@@ -34,30 +35,41 @@ const Todo: React.FC<ITodoProps> = (props) => {
   };
 
   const handleDebounce = () => {
-    if (debouncedText) {
+    if (debouncedText && !isFirstTime) {
       onChange(textUpdate);
     }
   };
 
   const handleDrag = () => console.log("Drag and drop");
-  const handleEdit = () => onChange(textUpdate);
-  const handleChange = (value: string) => setTextUpdate(value);
+
+  const handleEdit = () => {
+    setFirstTime(true);
+    onChange(textUpdate);
+  };
+
+  const handleChange = (value: string) => {
+    setFirstTime(false);
+    setTextUpdate(value);
+  };
+
   const handleDeleteItem = () => onDelete();
+
   const handleCompletedParent = () => setIsCompleted(isCompletedParent);
-  const handleChangeText = () => setTextUpdate(text);
+
+  const handleChangeText = () => setTextUpdate(todoText);
 
   useEffect(handleCompletedParent, [isCompletedParent]);
-  useEffect(handleChangeText, [text]);
+  useEffect(handleChangeText, [todoText]);
   useEffect(handleDebounce, [debouncedText]);
 
-  const todoText = isCompleted ? (
-    <p className={styles.todoCompleted}>{text}</p>
+  const todoTextEl = isCompleted ? (
+    <p className={styles.todoCompleted}>{todoText}</p>
   ) : (
     <Input
       variation={INPUT_VARIATIONS.NAKED}
       onEnter={handleEdit}
       onChange={handleChange}
-      value={text}
+      value={textUpdate}
       label="tarea por hacer"
     />
   );
@@ -69,8 +81,12 @@ const Todo: React.FC<ITodoProps> = (props) => {
         onClick={handleDrag}
         className={styles.dragDropIcon}
       />
-      <Checkbox isChecked={isCompleted} onChange={handleComplete} name={text} />
-      {todoText}
+      <Checkbox
+        isChecked={isCompleted}
+        onChange={handleComplete}
+        name={todoText}
+      />
+      {todoTextEl}
       <Icon action={ACTIONS.DELETE} onClick={handleDeleteItem} />
     </article>
   );

@@ -14,12 +14,8 @@ export type IFormTodoProps = {
   className?: string;
 };
 
-const FormTodo: React.FC<IFormTodoProps> = ({
-  state,
-  error: errorParent,
-  onSubmit,
-  className,
-}) => {
+const FormTodo: React.FC<IFormTodoProps> = (props) => {
+  const { state, error: errorParent, onSubmit, className } = props;
   const [text, setText] = useState<string>("");
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);

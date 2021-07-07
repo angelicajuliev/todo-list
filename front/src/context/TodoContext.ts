@@ -1,4 +1,4 @@
-import React, { createContext, useContext, } from "react";
+import React, { createContext, useContext } from "react";
 import { ToDo } from "../models/Todo";
 import { RequestState, REQUEST_STATES } from "../models/App";
 import api from "../api/todo.api";
@@ -17,6 +17,7 @@ export enum TODO_ACTIONS {
   INITIALIZE_PAGE = "init_todos",
   INIT_REQUEST_ADD_TODO = "initialize request to add_todo",
   ADD_TODO = "add_todo",
+  FAILURE_ADD_TODO = "failure_add_todo",
   UPDATE_TODO = "update_todo",
   DELETE_TODO = "delete_todo",
 }
@@ -36,9 +37,12 @@ export const ToDoReducer = (
     case TODO_ACTIONS.INIT_REQUEST_ADD_TODO:
       return { ...state, formState: REQUEST_STATES.PENDING };
 
+    case TODO_ACTIONS.FAILURE_ADD_TODO:
+      return { ...state, formState: REQUEST_STATES.FAILURE };
+
     case TODO_ACTIONS.ADD_TODO:
-      todos = [...todos, payload];
-      return { ...state, todos, formState: REQUEST_STATES.SUCCESS };
+      const newtodos = [...todos, payload];
+      return { ...state, todos: newtodos, formState: REQUEST_STATES.SUCCESS };
 
     case TODO_ACTIONS.UPDATE_TODO:
       todos = todos.map((t) => (t.id === payload.id ? payload : t));
@@ -61,9 +65,17 @@ export const ToDoActions: any = {
     };
   },
   addTodo: (dispatch: React.Dispatch<Action>) => {
-    return async (toDo: ToDo) => {
-      const result = await api.post<ToDo>("/todo", toDo);
-      dispatch({ type: TODO_ACTIONS.ADD_TODO, payload: result.data });
+    return (toDo: ToDo) => {
+      const request = api.post<ToDo>("/todo", toDo);
+      dispatch({ type: TODO_ACTIONS.INIT_REQUEST_ADD_TODO, payload: null });
+
+      request
+        .then((result) =>
+          dispatch({ type: TODO_ACTIONS.ADD_TODO, payload: result.data })
+        )
+        .catch(() =>
+          dispatch({ type: TODO_ACTIONS.FAILURE_ADD_TODO, payload: "Error" })
+        );
     };
   },
   deleteTodo: (dispatch: React.Dispatch<Action>) => {
