@@ -6,10 +6,19 @@ import { ToDo } from "../models/Todo";
 export type IHomeProps = {};
 
 const Home: React.FC<IHomeProps> = () => {
-  const { todos, formState, initialize, addTodo, updateTodo, deleteTodo } = useTodoContext();
-  const handleAdd = useCallback((todo: ToDo) => addTodo && addTodo(todo), []);
-  const handleUpdate = useCallback((todo: ToDo) => updateTodo && updateTodo(todo), []);
-  const handleDelete = useCallback((todo: ToDo) => deleteTodo && deleteTodo(todo), []);
+  const { todos, formState, initialize, addTodo, updateTodo, deleteTodo } =
+    useTodoContext();
+  const handleAdd = useCallback((todo: ToDo) => {
+    addTodo && addTodo(todo);
+  }, []);
+  const handleUpdate = useCallback(
+    (todo: ToDo) => updateTodo && updateTodo(todo),
+    []
+  );
+  const handleDelete = useCallback((todo: ToDo) => {
+    deleteTodo && deleteTodo(todo);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   useEffect(() => {
     initialize && initialize();

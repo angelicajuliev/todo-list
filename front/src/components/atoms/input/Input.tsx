@@ -1,4 +1,4 @@
-import React, { Ref, useEffect, useRef, useState } from "react";
+import React, { Ref, useEffect, useState } from "react";
 import TextField from "@material-ui/core/TextField";
 import InputBase from "@material-ui/core/InputBase";
 
@@ -29,10 +29,10 @@ const Input: React.FC<IInputProps> = React.forwardRef(
       label,
       placeholder,
       onChange,
-      onEnter,
       variation = INPUT_VARIATIONS.OUTLINE,
       value: valueParent,
     } = props;
+    const { onEnter, ...propsInput  } = props
     const [value, setValue] = useState("");
 
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -70,7 +70,7 @@ const Input: React.FC<IInputProps> = React.forwardRef(
         <div>
           <InputBase
             value={value}
-            {...props}
+            {...propsInput}
             inputRef={ref}
             error={!!error}
             aria-label={label}

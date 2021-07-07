@@ -73,8 +73,8 @@ const Home: React.FC<IHomeProps> = (props) => {
       <Header />
       <main className={styles.container}>
         <SelectStates className={styles.filter} onChange={handleFilterToDos} />
-        <article className={styles.content}>{shownToDos.length === 0 ? emptyEl : listEl}</article>
         <FormTodo className={styles.form} state={formState} onSubmit={handleAddToDo} />
+        <article className={styles.content}>{shownToDos.length === 0 ? emptyEl : listEl}</article>
       </main>
     </section>
   );
